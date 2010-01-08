@@ -1,0 +1,27 @@
+#summary Common Use Case Setup Instructions
+#labels Featured,Phase-Deploy
+
+= Introduction =
+
+This assumes that you have setup and configured MySQL for Master/Slave Replication already, and have fired up the replication manually and loaded data into the slave. [http://www.howtoforge.com/mysql_database_replication instructions]
+
+== Use Case: Cron Job to Monitor and Repair MySQL for Master/Slave Replication ==
+
+If you've already got a cluster/replication setup, you'll want something running all the time to ensure that it's working.  You can install this utility to manually verify that it works, and then we can automate it via a cron job. (instructions for a Linux server, Windows people should be able to figure out their variation)
+
+=== Install and Configuration===
+WIP
+
+=== Setup the Monitor For Manual Mode ===
+WIP
+
+=== Test the Monitor ===
+WIP
+
+=== Setup the Cron Job ===
+WIP
+
+=== Rest Peacfully ===
+Do you realize how much nicer it is, when things fix themselves?  I do, and it makes me happy.
+
+Cheers!
