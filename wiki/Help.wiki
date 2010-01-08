@@ -1,0 +1,31 @@
+#summary Terms and Information
+#labels Featured,Phase-Support
+
+= Actions =
+
+== Restart Slave ==
+This action will restart the Slave server
+{{{
+STOP SLAVE;
+RESET SLAVE;
+CHANGE MASTER TO MASTER_LOG_FILE='$file', MASTER_LOG_POS=$pos;
+START SLAVE;
+}}}
+And then it will test status again, by preforming a "Skip Start Slave" action.
+
+== Skip Start Slave ==
+Sometimes there's a conflict when replicating content from the Master to the Slave (perhaps someone wrote a record to the slave?).  This action will attempt to skip the record and start replication again... it loops 10 times, attempting.
+{{{
+SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1;
+START SLAVE;
+START SLAVE IO_THREAD;
+START SLAVE SQL_THREAD;
+}}}
+This results in a status message, testing after the start.
+
+== Load Data From Master ==
+This is a manual link, which can load data from the master.
+WARNING: this can be really slow and lock up the server while running.
+{{{
+LOAD DATA FROM MASTER;
+}}}
