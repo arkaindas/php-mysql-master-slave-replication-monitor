@@ -9,12 +9,13 @@ This preforms a test (status and row replication testing) and returns the status
 This preforms a test (status and row replication testing) and returns "Success" if successful.  If the test fails, it then attempts to automatically "Heal" by restarting the replication (see *Restart Slave*).  It will then test again and return the status: "Success" or "Failure"
 `..../replication-monitor/?action=TestAndHeal`
 
-
-Test Test & Heal Restart Slave Skip Start Slave Break Replication (destructive) Rebuild Slave (destructive) 
-
-
-
-
+= Actions: HTML Response =
+== Test ==
+Like Above, but with more output, links, errors, and debugging information.
+`..../replication-monitor/?action=TestHTML`
+== Test & Heal ==
+Like Above, but with more output, links, errors, and debugging information.
+`..../replication-monitor/?action=TestAndHealHTML`
 == Restart Slave ==
 This action will restart the Slave server
 {{{
@@ -24,6 +25,7 @@ CHANGE MASTER TO MASTER_LOG_FILE='$file', MASTER_LOG_POS=$pos;
 START SLAVE;
 }}}
 And then it will test status again, by preforming a "Skip Start Slave" action.
+`..../replication-monitor/?action=RestartSlave`
 
 == Skip Start Slave ==
 Sometimes there's a conflict when replicating content from the Master to the Slave (perhaps someone wrote a record to the slave?).  This action will attempt to skip the record and start replication again... it loops 10 times, attempting.
@@ -34,10 +36,16 @@ START SLAVE IO_THREAD;
 START SLAVE SQL_THREAD;
 }}}
 This results in a status message, testing after the start.
+`..../replication-monitor/?action=SkipStartSlaveIfBadStatus`
 
-== Load Data From Master ==
-This is a manual link, which can load data from the master.
-WARNING: this can be really slow and lock up the server while running.
-{{{
-LOAD DATA FROM MASTER;
-}}}
+= Actions: Testing =
+== Break Replication (destructive) ==
+This writes a row to the slave, which will break your replication.  Useful for testing, but be really careful in a production environment.  (you can edit the code to remove this link if you like.)
+`..../replication-monitor/?action=BreakReplication`
+
+== Rebuild Slave (destructive) ==
+This will stop replication, delete all databases on the slave, and then load the data from the master.  
+
+*WARNING: this can be _really slow_ and lock up the server while running.*
+
+`..../replication-monitor/?action=RebuildSlave`
