@@ -1,7 +1,19 @@
 #summary Terms and Information
 #labels Featured,Phase-Support
 
-= Actions =
+= Actions: Minimal Response =
+== Test ==
+This preforms a test (status and row replication testing) and returns the status: "Success" or "Failure"
+`..../replication-monitor/?action=Test`
+== Test & Heal ==
+This preforms a test (status and row replication testing) and returns "Success" if successful.  If the test fails, it then attempts to automatically "Heal" by restarting the replication (see *Restart Slave*).  It will then test again and return the status: "Success" or "Failure"
+`..../replication-monitor/?action=TestAndHeal`
+
+
+Test Test & Heal Restart Slave Skip Start Slave Break Replication (destructive) Rebuild Slave (destructive) 
+
+
+
 
 == Restart Slave ==
 This action will restart the Slave server
