@@ -17,8 +17,10 @@ svn checkout http://php-mysql-master-slave-replication-monitor.googlecode.com/sv
 chmod 755 /var/www/replication-monitor -R
 mysql -uroot -p -hdb-master < /var/www/replication-monitor/create.util_replication.sql
 }}}
+
 NOTE: you might need to import the replication code onto your slave if it's not already replicating correctly... get that setup and working first!
 
+SUGGESTION: Secure your installation with an .htaccess/.htpasswd file, or perhaps restrict the IPs which can get to the folder... Exposing something which can break your replication is a terrible idea. *this is meant to be non-public / internal-only*
 
 === Setup the Monitor For Manual Mode ===
 
