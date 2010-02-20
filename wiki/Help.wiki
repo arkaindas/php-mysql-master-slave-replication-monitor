@@ -58,4 +58,6 @@ This will stop replication, delete all databases on the slave, and then load the
 
 *WARNING: this can be _really slow_ and lock up the server while running.*
 
+When I do this, I typically will change hosts/dns to repoint "slave" to the master server so nothing is hitting the slave... then rebuild the slave... once complete, swap the hosts/dns back.  (of course this assumes you have configured the replication-monitor to access the slave server by a different means/hostname)
+
 `..../replication-monitor/?action=RebuildSlave`
