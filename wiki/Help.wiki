@@ -60,4 +60,17 @@ This will stop replication, delete all databases on the slave, and then load the
 
 When I do this, I typically will change hosts/dns to repoint "slave" to the master server so nothing is hitting the slave... then rebuild the slave... once complete, swap the hosts/dns back.  (of course this assumes you have configured the replication-monitor to access the slave server by a different means/hostname)
 
+This runs the following on the slave:
+{{{
+STOP SLAVE;
+SHOW DATABASES;
+DROP DATABASE `$eachDatabase`; #excluding 'mysql' and 'information_schema'
+LOAD DATA FROM MASTER;
+}}}
+
 `..../replication-monitor/?action=RebuildSlave`
+
+also, you can run each sub-function of the process:
+`..../replication-monitor/?action=DeleteSlave`
+`..../replication-monitor/?action=LoadDataFromMaster`
+`..../replication-monitor/?action=RestartSlave`
