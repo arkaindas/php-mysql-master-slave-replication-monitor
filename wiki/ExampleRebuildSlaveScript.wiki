@@ -1,6 +1,8 @@
 #labels Featured,Phase-Implementation,Phase-Deploy
 Below is a simple bash script which, if properly customized will help you to rebuild a slave server from the master by means of a specialized mysqldump.
 
+_(are you looking for the InstallationAndStandardUseCase documentation for the PHP MySQL Master/Slave Replication Monitor?  if so, this isn't it... this is just a helpful extra.)_
+
 We use a version of this script in our production environment when our slave gets out of sync (not too often) and it works for us. 
 
   # It starts by modifying the hosts file and copying it out to other servers (so that all requests to db-slave actually go to the master, while this rebuild happens).  
