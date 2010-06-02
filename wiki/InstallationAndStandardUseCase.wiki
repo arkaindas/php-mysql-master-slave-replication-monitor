@@ -18,7 +18,7 @@ chmod 755 /var/www/replication-monitor -R
 mysql -uroot -p -hdb-master < /var/www/replication-monitor/create.util_replication.sql
 }}}
 
-NOTE: you might need to import the replication code onto your slave if it's not already replicating correctly... get that setup and working first!
+NOTE: you might need to import the replication code onto your slave if it's not already replicating correctly... get that setup and working first!  Also, if you are only replicating specific databases, you will need to add util_replication as another database to replicate.
 
 SUGGESTION: Secure your installation with an .htaccess/.htpasswd file, or perhaps restrict the IPs which can get to the folder... Exposing something which can break your replication is a terrible idea. *this is meant to be non-public / internal-only*
 
@@ -34,10 +34,10 @@ $replication->startup(array(
 		'testDB' => 'util_replication'
 	),
 	'slave' => array(
-			'host' => '10.0.0.2',
-			'user' => 'root',
-			'pass' => 'MySuperSecretPassword',
-			'testDB' => 'util_replication'
+		'host' => '10.0.0.2',
+		'user' => 'root',
+		'pass' => 'MySuperSecretPassword',
+		'testDB' => 'util_replication'
 	),
 ));
 }}}
@@ -45,6 +45,8 @@ $replication->startup(array(
 === Test the Monitor ===
 
 This is really easy, just browse to the `replication-monitor` folder and try out the links.  Check out [http://code.google.com/p/php-mysql-master-slave-replication-monitor/wiki/Help more information on the actions], if you need clarification.  (be careful about those _destructive_ links, they are there for testing only)
+
+Also, the more I've played with this, especially for larger databases, the less useful any of the extra links are... the monitoring (test and heal) functionality is still perfect, but for other administration like rebuilding the slave, you're probably in need of a script. (ExampleRebuildSlaveScript)
 
 === Setup the Cron Job ===
 
